@@ -262,18 +262,18 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    padding: 20px; /* Added padding to ensure the modal doesn’t go edge-to-edge */
+    padding: 20px; 
     box-sizing: border-box;
 }
 
 .video-container {
     width: 100%;
     max-width: 1400px;
-    height: auto; /* Set height to auto for better responsiveness */
+    height: auto; 
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    aspect-ratio: 16 / 9; /* Ensure consistent video aspect ratio */
+    aspect-ratio: 16 / 9; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -283,7 +283,7 @@ body {
 .video-container video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Makes sure video covers the container without black space */
+    object-fit: cover; 
 }
 
 .overlay-youtube-icon {
@@ -546,7 +546,7 @@ body {
 
      .video-container {
         width: 95%;
-        height: auto; /* Maintain responsiveness on smaller screens */
+        height: auto; 
     }
 
 
@@ -583,7 +583,7 @@ body {
     }
     .video-container {
         width: 100%;
-        height: auto; /* Maximize usage of screen width on very small devices */
+        height: auto; 
     }
     .carousel-image {
         width: 100%;
