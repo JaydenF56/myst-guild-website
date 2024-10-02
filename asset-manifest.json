@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/myst-guild-website/static/css/main.1d88fe9c.css",
+    "main.css": "/myst-guild-website/static/css/main.9a79cba0.css",
     "main.js": "/myst-guild-website/static/js/main.9f52903e.js",
     "static/js/453.ccdf0aba.chunk.js": "/myst-guild-website/static/js/453.ccdf0aba.chunk.js",
     "static/media/slick.svg": "/myst-guild-website/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -8,12 +8,12 @@
     "static/media/slick.ttf": "/myst-guild-website/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/myst-guild-website/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/myst-guild-website/index.html",
-    "main.1d88fe9c.css.map": "/myst-guild-website/static/css/main.1d88fe9c.css.map",
+    "main.9a79cba0.css.map": "/myst-guild-website/static/css/main.9a79cba0.css.map",
     "main.9f52903e.js.map": "/myst-guild-website/static/js/main.9f52903e.js.map",
     "453.ccdf0aba.chunk.js.map": "/myst-guild-website/static/js/453.ccdf0aba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1d88fe9c.css",
+    "static/css/main.9a79cba0.css",
     "static/js/main.9f52903e.js"
   ]
 }
