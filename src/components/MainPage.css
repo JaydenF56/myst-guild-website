@@ -1,74 +1,32 @@
 :root {
-    --bg-color: #000000; /* Background color */
-    --header-bg-color: #0c0c0c; /* Header background color */
-    --text-color: #fff; /* Main text color */
-    --secondary-text-color: #aaa; /* Secondary text color */
-    --header-text-color: #95D721; /* Header text color */
-    --secondary-header-text-color: var(--secondary-text-color); /* Secondary header text color */
-    
-    --link-color: #95D721; /* Link color */
-    --link-hover-color: yellowgreen; /* Link hover color */
-    
-    --button-bg-color: #95D721; /* Button background color */
-    --button-hover-bg-color: yellowgreen; /* Button hover background color */
-    --font-family: "Roboto Condensed",'Trebuchet MS','Tahoma',sans-serif;
+    --bg-color: #000000;
+    --header-bg-color: #0c0c0c;
+    --text-color: #fff;
+    --secondary-text-color: #aaa;
+    --header-text-color: #95D721;
+    --secondary-header-text-color: var(--secondary-text-color);
+    --link-color: #95D721;
+    --link-hover-color: yellowgreen;
+    --button-bg-color: #95D721;
+    --button-hover-bg-color: yellowgreen;
+    --font-family: "Roboto Condensed", 'Trebuchet MS', 'Tahoma', sans-serif;
 }
 
-
-/* Reset margins and paddings for body and html */
 html,
 body {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* Full height for html and body */
     background-color: var(--bg-color);
-    /* Dark grey background */
+    overflow: hidden; /* Prevent body scrolling */
 }
 
-/* General page styling */
 .page-container {
-    background-color: var(--bg-color);
-    /* Dark grey background */
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     color: var(--text-color);
     font-family: var(--font-family);
-    width: 100%;
-    /* Ensure full width */
-}
-
-/* Header */
-.header {
-    position: sticky;
-    top: 0;
-    /* Stick to the top of the viewport */
-    /* Ensure it appears above other content */
-    width: 100%;
-    /* Full width for the header */
-    background-color: var(--header-bg-color);
-    /* Darker grey background for header */
-    padding: 5px 0;
-    /* Vertical padding */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-    z-index: 9999; /* Ensure it appears above the video */
-}
-
-/* Header Content Wrapper */
-.header-content {
-    max-width: 1400px;
-    /* Limit header contents to a max width */
-    width: 100%;
-    /* Full width for responsive */
-    margin: 0 auto;
-    /* Center the header contents */
-    display: flex;
-    /* Flexbox for alignment */
-    justify-content: space-between;
-    /* Space between items */
-    align-items: center;
-    /* Align items vertically */
 }
 
 .header {
@@ -88,7 +46,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* Required for absolutely positioning the center */
+    position: relative;
 }
 
 .header-left,
@@ -97,7 +55,6 @@ body {
     align-items: center;
 }
 
-/* Center header text absolutely in the middle of the header-content */
 .header-center {
     position: absolute;
     left: 50%;
@@ -105,20 +62,24 @@ body {
     color: var(--link-color);
     font-size: 14px;
     font-weight: bold;
-    white-space: nowrap; /* Prevents text wrapping */
+    white-space: nowrap;
 }
 
 .header-right i {
     color: var(--text-color);
     font-size: 20px;
 }
+
 .header-right i:hover {
     color: var(--button-hover-bg-color);
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
+.header-right a {
+    margin-right: 5px;
+}
+
+.header-right a:last-child {
+    margin-right: 0;
 }
 
 .header-image {
@@ -137,147 +98,90 @@ body {
     margin: 0;
 }
 
-
-/* Social Icon Styling */
 .social-icon {
     width: 24px;
     height: 24px;
     margin-left: 15px;
     filter: brightness(0) invert(1);
-    /* Makes icon white */
 }
 
-/* Main content */
 .main-content {
-    display: flex;
-    flex-direction: column;
-    /* Stack sections vertically */
-    width: 90%;
-    /* Content width */
+    flex: 1; /* Take up remaining height */
+    overflow-y: auto; /* Make the main content scrollable */
+    width: 100%;
     max-width: 1400px;
-    /* Limit width on larger screens */
-    /* Centered on the page */
-    margin: 0 auto 10px; /* top: 0, right: auto, bottom: 10px, left: auto */
-
+    margin: 0 auto 10px;
+    padding: 10px 0; /* Padding to separate content from edges */
 }
 
-/* Styling for the Twitch links */
 .twitch-link,
 .go-to-channel {
-    color: var(--link-color);          /* Set text color to lime green */
-    text-decoration: none;              /* Remove underline */
-    transition: color 0.3s;             /* Smooth transition for color change */
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-/* Change color on hover */
 .twitch-link:hover,
 .go-to-channel:hover {
-    color: var(--link-hover-color);        /* Change color to yellow-green on hover */
+    color: var(--link-hover-color);
 }
 
-.video-container {
-    position: relative;
-    /* Position relative for the overlay */
-    width: 100%;
-    /* Full width */
-    padding-bottom: 56.25%;
-    /* 16:9 Aspect Ratio */
-    height: 0;
-    /* Height set to 0 */
-    overflow: hidden;
-    /* Hide overflow */
-}
-
-.video-iframe {
-    position: absolute;
-    /* Position absolute for the iframe */
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    border: none;
-    /* Remove border */
-}
-
-.overlay {
-    position: absolute;
-    /* Position absolute for the overlay */
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    background-color: rgba(0, 0, 0, 0);
-    /* Transparent background */
-    pointer-events: all;
-    /* Capture all pointer events */
-}
-
-/* Pseudo-element for the dark edges overlay */
-.video-container::before {
-    content: ""; /* Necessary for pseudo-element */
-    position: absolute; /* Position absolutely to cover the video */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        to bottom, /* Fade from top to bottom */
-        rgba(0, 0, 0, 1) 0%,  /* Dark overlay starting at the top */
-        rgba(0, 0, 0, 0) 50%, /* Lighter towards the middle */
-        rgba(0, 0, 0, 1) 100%  /* Transparent at the bottom */
-    ); /* Dark edges with a fade effect */
-    z-index: 2500; /* Ensure it appears above the video */
-    pointer-events: none; /* Allows clicking through to the video */
-}
-
-/* Container for Recruitment and Streams */
 .recruitment-streams-container {
     display: flex;
-    /* Flexbox for side-by-side layout */
     justify-content: space-between;
-    /* Space out recruitment and streams */
     flex-wrap: wrap;
-    /* Allow wrapping on smaller screens */
-
+    margin-bottom: 20px;
 }
 
-/* Recruitment Section */
 .recruitment-section {
-    width: 65%;
-    /* Wider section for recruitment */
+    width: 68%;
     background-color: var(--header-bg-color);
-    /* Darker background for the section */
     border-radius: 5px;
     flex-shrink: 0;
     position: relative;
     min-height: 200px;
     max-height: 200px;
-
 }
 
-/* Streams Section */
+.latest-kill-carousel {
+    width: 100%;
+    max-height: 70vh;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-image-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .streams-section {
     width: 30%;
-
     background-color: var(--header-bg-color);
     border-radius: 5px;
     flex-shrink: 0;
-
 }
 
-/* Recruitment Section Header */
 .recruitment-section h2 {
-    color: var( --header-text-color);
+    color: var(--header-text-color);
     font-size: 16px;
 }
 
-/* Recruitment Info */
-.recruitment-info {
+.recruitment-info,
+.streams-section-info {
     margin-top: 5px;
+    padding: 10px;
 }
 
 .recruitment-item {
@@ -317,126 +221,132 @@ body {
     color: #11eb5a;
 }
 
-/* Apply button */
 .apply-button {
-    position: absolute; /* Use absolute positioning */
-    bottom: 10px; /* Adjust as needed for spacing from the bottom */
-    right: 10px; /* Adjust as needed for spacing from the right */
+    position: absolute;
+    top: 5px;
+    right: 10px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: var(--button-bg-color);
+    background-color: #141414;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: white;
 }
 
-/* Apply button hover effect */
 .apply-button:hover {
-    background-color: var(--button-hover-bg-color);
+    color: limegreen;
 }
 
-/* Recruitment Section Header */
 .recruitment-section h2,
 .streams-section h2 {
     font-family: "Roboto Condensed", sans-serif;
     text-transform: uppercase;
-    color: var( --header-text-color);
+    color: white;
     margin: 0;
     font-size: 18px;
     letter-spacing: 0.5px;
+    background: linear-gradient(to right, rgba(34, 139, 34, 0.08), rgba(20, 20, 20, 0));
+    padding: 10px 20px;
+    position: relative;
+    display: inline-block;
 }
 
-/* New Styles for Role Icons and Stream Info */
+.recruitment-section h2::before,
+.streams-section h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background-color: limegreen;
+}
+
+.recruitment-section h2 span.first-word,
+.streams-section h2 span.first-word {
+    color: #ff8a00;
+    font-weight: bold;
+}
+
 .stream-info {
     display: flex;
-    align-items: center; /* Align icon and name horizontally */
-}
-/* Ensure that the sections have padding for the rest of the content */
-.recruitment-section,
-.streams-section {
-    padding: 10px;
-    /* Add some padding to the sections */
+    align-items: center;
 }
 
-/* Styling for Stream Items */
 .stream-item {
     display: flex;
-    /* Flexbox for alignment */
     align-items: center;
-    /* Align items vertically */
     margin-bottom: 5px;
-    /* Space between items */
 }
 
 .stream-thumbnail {
-    width: 100px;
-    /* Width of the stream thumbnail */
-    height: 60px;
-    /* Height of the stream thumbnail */
+    width: 70px;
+    height: 50px;
     margin-right: 10px;
-    /* Space between thumbnail and details */
     border-radius: 5px;
-    /* Slightly round corners */
 }
 
 .stream-details {
     display: flex;
-    /* Flexbox for stream details */
     flex-direction: column;
-    /* Stack details vertically */
     justify-content: center;
-    /* Center items vertically */
 }
 
 .stream-details h3 {
     font-size: 16px;
-    /* Size of stream title */
     margin: 0;
-    /* Remove default margin */
 }
 
 .stream-viewers {
     font-size: 14px;
-    /* Size of viewer count */
     color: #aaa;
-    /* Lighter color for viewers */
 }
 
-/* Styles for Offline Indicator */
 .stream-offline {
     color: #ff4444;
-    /* Color for offline status */
     font-weight: bold;
-    /* Bold text */
 }
+
 .offline-section {
-    margin-top: 10px; /* Space above offline section */
+    margin-top: 10px;
 }
-  
+
 .offline-header {
     display: flex;
-    justify-content: space-between; /* Align items with space between */
-    align-items: center; /* Vertically center items */
+    justify-content: space-between;
+    align-items: center;
     text-transform: uppercase;
     color: #fff;
     font-size: 16px;
     letter-spacing: 0.5px;
-
 }
-  
+
+.image-placeholder-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-placeholder {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
 .expand-button {
     background: none;
     border: none;
     font-size: 1.5em;
     cursor: pointer;
-    margin-left: 10px; /* Spacing between the text and button */
+    margin-left: 10px;
     color: var(--link-color);
 }
 
-/* Hover effects */
 .twitch-link {
     color: var(--link-color);
-    /* Twitch brand color */
     text-decoration: none;
     font-weight: bold;
 }
@@ -444,116 +354,107 @@ body {
 .twitch-link:hover {
     text-decoration: none;
 }
+
 .role-icon {
-    width: 20px; /* Adjust as necessary */
-    height: 20px; /* Adjust as necessary */
-    margin-right: 5px; /* Adjust to add spacing between the icon and the name */
-    vertical-align: middle; /* To align the icon with the text */
-  }
-  
-/* Tablet Adjustments */
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
 @media (max-width: 1424px) {
     .header-title {
         font-size: 24px;
-        /* Adjust title font size for tablets */
     }
-   /* Header Content Wrapper */
-   .header-content {
-    width: 90%;
-}
+
+    .header-content {
+        width: 90%;
+    }
 
     .header-center {
         font-size: 16px;
-        /* Adjust center text size for tablets */
     }
-    .video-container {
-        padding-bottom: 35%;
-    }
-    
+
     .recruitment-section {
         width: 60%;
-        /* Full width on smaller screens */
     }
 
     .class-name {
         font-size: 18px;
-        /* Larger class name for tablets */
     }
 
     .priority {
         font-size: 16px;
-        /* Adjust priority text size for tablets */
     }
 
     .apply-button {
         width: auto;
-        /* Set width to auto for a more compact button on tablets */
         padding: 10px 20px;
-        /* Add padding for better touch targets */
-    }
-
-    .video-iframe {
-        height: 400px;
-        /* Adjust video height for tablets */
     }
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .video-container {
-        margin-top: 0px;
-        padding-bottom: 65%;
-    }
-    
     .recruitment-section,
     .streams-section {
-        width: 95%;
-        /* Full width on smaller screens */
-        margin-bottom: 10px;
+        width: 95%; /* Take up most of the width */
+        margin: 0 auto 10px; /* Center sections horizontally and add bottom margin */
+        box-sizing: border-box; /* Ensure padding is included in the element's width */
     }
-
-    /* Header Content Wrapper */
+    
+    .latest-kill-carousel {
+        width: 100%;
+        height: 30vh;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    .apply-button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        background-color: #141414;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+    }
+    
+    .apply-button:hover {
+        color: limegreen;
+    }
     .header-content {
-        width: 95%;
+        margin: 0 20px;
     }
 
+    .header-center {
+        display: none;
+    }
 
     .recruitment-streams-container {
         flex-direction: column;
-        /* Stack recruitment and streams vertically */
     }
-
-
 }
 
 @media (max-width: 480px) {
     .header-title {
         font-size: 16px;
-        /* Smaller title font */
     }
 
     .video-iframe {
         height: 200px;
-        /* Smaller height for very small screens */
     }
 
     .header-center {
         font-size: 12px;
-        /* Smaller center text */
     }
 
     .class-name {
         font-size: 16px;
-        /* Smaller class name */
     }
 
     .priority {
         font-size: 14px;
-        /* Smaller priority text */
-    }
-
-    .apply-button {
-        width: 100%;
-        /* Full width apply button on small screens */
     }
 }
