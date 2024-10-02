@@ -8,7 +8,10 @@ const MainPage = () => {
   const [liveStreams, setLiveStreams] = useState([]);
   const [offlineStreams, setOfflineStreams] = useState([]);
   const [isOfflineExpanded, setIsOfflineExpanded] = useState(false);
-  const offlineSectionRef = useRef(null); // Create a ref for the offline section
+  const [currentSlide, setCurrentSlide] = useState(0); // Track current slide index
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false); // Track video modal visibility
+  const offlineSectionRef = useRef(null);
+  const sliderRef = useRef(null); // Ref for the Slider instance
 
   const CLIENT_ID = process.env.REACT_APP_TWITCH_CLIENT_ID;
   const OAUTH_TOKEN = process.env.REACT_APP_TWITCH_OAUTH_TOKEN;
@@ -17,7 +20,7 @@ const MainPage = () => {
   const twitchChannels = useMemo(() => [
     'silkiverse',
     'itsshynie',
-    'Raxity1'
+    'Raxity1',
   ], []);
 
   // Updated Mapping for Display Names
@@ -44,6 +47,7 @@ const MainPage = () => {
     'Hammonds': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
     'Kendk': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`, // Tank role
     'Raxity1': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
+
   };
 
   // Role priority to help sorting offline streams by role
@@ -55,20 +59,36 @@ const MainPage = () => {
 
   // Sample images for carousel
   const carouselImages = [
-    `${process.env.PUBLIC_URL}/Myst-Banner.webp`,
-    `${process.env.PUBLIC_URL}/Myst-Banner1.webp`,
+    {
+      image: `${process.env.PUBLIC_URL}/Myst-Banner.webp`,
+      videoUrl: 'https://www.youtube.com/embed/yR0CfrZh26g',
+      overlayText: 'Defeats Heroic: Ragnaros'
+    },
+    {
+      image: `${process.env.PUBLIC_URL}/Myst-Banner1.webp`,
+      videoUrl: 'https://www.youtube.com/embed/gRYZijLZR-Q',
+      overlayText: 'Defeats Heroic: Nefarian'
+    },
+    {
+      image: `${process.env.PUBLIC_URL}/Myst-Banner2.webp`,
+      videoUrl: 'https://www.youtube.com/embed/qz-aQaBQgHY',
+      overlayText: 'Defeats Heroic: Sinestra'
+
+    },
   ];
 
   // Slider settings for react-slick
   const sliderSettings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     arrows: true,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
+    ref: sliderRef,
   };
 
   useEffect(() => {
@@ -138,15 +158,28 @@ const MainPage = () => {
       }, 200); // Delay to ensure the offline section expands before scrolling
     }
   };
+  // Function to open the video modal
+  const openVideoModal = () => {
+    setIsVideoModalOpen(true);
+    if (sliderRef.current) {
+      sliderRef.current.slickPause();
+    }
+  };
 
+  // Function to close the video modal
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
+    if (sliderRef.current) {
+      sliderRef.current.slickPlay();
+    }
+  };
   return (
     <div className="page-container">
       {/* Header */}
       <header className="header">
         <div className="header-content">
           <div className="header-left">
-            <img src={`${process.env.PUBLIC_URL}/Myst-Future.png`} alt="Left Image" className="header-image left" />
-            <img src={`${process.env.PUBLIC_URL}/MYST.png`} alt="Right Image" className="header-image-right" />
+            <img src={`${process.env.PUBLIC_URL}/MystLogo.png`} alt="Left Image" className="header-image left" />
           </div>
           <div className="header-center">
             <span>REALM FIRST Heroic: Ragnaros</span>
@@ -162,17 +195,51 @@ const MainPage = () => {
         </div>
       </header>
 
-      {/* Main content area */}
-      <div className="main-content">
+     {/* Main content area */}
+     <div className="main-content">
         <div className="latest-kill-carousel">
-          <Slider {...sliderSettings}>
-            {carouselImages.map((image, index) => (
-              <div key={index} className="carousel-image-container">
-                <img src={image} alt={`Slide ${index + 1}`} className="carousel-image" />
-              </div>
-            ))}
-          </Slider>
+          <div className="carousel-container">
+            <Slider ref={sliderRef} {...sliderSettings}>
+              {carouselImages.map((item, index) => (
+                <div key={index} className="carousel-image-container">
+                  <img src={item.image} alt={`Slide ${index + 1}`} className="carousel-image" />
+                </div>
+              ))}
+            </Slider>
+            {/* Overlay that appears on top of the image */}
+            <div className="carousel-bottom-overlay">
+              <img src={`${process.env.PUBLIC_URL}/MystLogo.png`} alt="Logo" className="overlay-logo-left" />
+              <h2 className="overlay-text-right">
+                {carouselImages[currentSlide].overlayText}
+              </h2>
+              {carouselImages[currentSlide].videoUrl && (
+                <img
+                  src={`${process.env.PUBLIC_URL}/youtube-icon.png`}
+                  alt="Watch Video"
+                  className="overlay-youtube-icon"
+                  onClick={openVideoModal}
+                />
+              )}
+            </div>
+          </div>
         </div>
+
+        {/* Video Modal */}
+        {isVideoModalOpen && (
+          <div className="video-modal" onClick={closeVideoModal}>
+            <div className="video-container" onClick={(e) => e.stopPropagation()}>
+            <iframe
+                width="100%"
+                height="100%"
+                src={`${carouselImages[currentSlide].videoUrl}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        )}
 
         {/* Container for Recruitment and Live Streams */}
         <div className="recruitment-streams-container">
