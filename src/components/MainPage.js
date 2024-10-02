@@ -297,7 +297,7 @@ const MainPage = () => {
                   </div>
                 ))
               ) : (
-                <p>No live streams available.</p>
+                <p>Everyone is Offline.</p>
               )}
 
               {/* Offline Section */}
