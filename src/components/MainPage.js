@@ -28,13 +28,8 @@ const MainPage = () => {
   // Updated Mapping for Display Names
   const displayNames = {
     'itsshynie': 'Shynie',
-    'Mellfunctionn': 'Mellindia',
     'silkiverse': 'Silky',
     'Steel': 'Coony',
-    'Hfd': 'Hfd',
-    'Cuhringe': 'Cuhringe',
-    'Hammonds': 'Hammonds',
-    'Kendk': 'Kendk',
     'Raxity1': 'Rax',
     'gatobeats': 'TEST STREAM',
   };
@@ -44,11 +39,6 @@ const MainPage = () => {
     'itsshynie': `${process.env.PUBLIC_URL}/Icon-class-role-healer-42x42.webp`,
     'silkiverse': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`,
     'Steel': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
-    'Mellfunctionn': `${process.env.PUBLIC_URL}/Icon-class-role-healer-42x42.webp`,
-    'Hfd': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
-    'Cuhringe': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
-    'Hammonds': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
-    'Kendk': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`,
     'Raxity1': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
     'gatobeats': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
 
