@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Channel ID Finder</title>
+</head>
+<body>
+    <h2>YouTube Channel ID Finder</h2>
+    <input type="text" id="channelName" placeholder="Enter YouTube channel name">
+    <button onclick="getChannelId()">Get Channel ID</button>
+    <p id="result"></p>
+
+    <script>
+        // Your YouTube API Key
+        const API_KEY = 'AIzaSyCcdaS6tcvc-ulS6D5pSYyBq5-Vs454BDc';
+
+        // Function to get channel ID from channel name
+        async function getChannelId() {
+            const channelName = document.getElementById('channelName').value.trim();
+            if (!channelName) {
+                alert('Please enter a channel name');
+                return;
+            }
+
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${encodeURIComponent(channelName)}&key=${API_KEY}`;
+
+            try {
+                // Fetch channel data from YouTube API
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.items && data.items.length > 0) {
+                    const channelId = data.items[0].id.channelId;
+                    document.getElementById('result').innerText = `Channel ID for '${channelName}' is: ${channelId}`;
+                } else {
+                    document.getElementById('result').innerText = `No channel found for '${channelName}'`;
+                }
+            } catch (error) {
+                document.getElementById('result').innerText = `Error fetching channel ID: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

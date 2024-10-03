@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
-import Slider from "react-slick"; 
+import Slider from "react-slick";
 import './MainPage.css';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css"; 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MainPage = () => {
   const [liveStreams, setLiveStreams] = useState([]);
@@ -10,8 +10,9 @@ const MainPage = () => {
   const [isOfflineExpanded, setIsOfflineExpanded] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0); // Track current slide index
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false); // Track video modal visibility
+  const [currentVideo, setCurrentVideo] = useState(null);
   const offlineSectionRef = useRef(null);
-  const sliderRef = useRef(null); // Ref for the Slider instance
+  const sliderRef = useRef(null);
 
   const CLIENT_ID = process.env.REACT_APP_TWITCH_CLIENT_ID;
   const OAUTH_TOKEN = process.env.REACT_APP_TWITCH_OAUTH_TOKEN;
@@ -21,6 +22,7 @@ const MainPage = () => {
     'silkiverse',
     'itsshynie',
     'Raxity1',
+    'gatobeats'
   ], []);
 
   // Updated Mapping for Display Names
@@ -34,46 +36,42 @@ const MainPage = () => {
     'Hammonds': 'Hammonds',
     'Kendk': 'Kendk',
     'Raxity1': 'Rax',
+    'gatobeats': 'TEST STREAM',
   };
 
   // Updated Mapping for Role Icons
   const roleMappings = {
-    'itsshynie': `${process.env.PUBLIC_URL}/Icon-class-role-healer-42x42.webp`, // Healer role
-    'silkiverse': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`, // Tank role
-    'Steel': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
-    'Mellfunctionn': `${process.env.PUBLIC_URL}/Icon-class-role-healer-42x42.webp`, // Healer role
-    'Hfd': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
-    'Cuhringe': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
-    'Hammonds': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
-    'Kendk': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`, // Tank role
-    'Raxity1': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`, // Dealer role
+    'itsshynie': `${process.env.PUBLIC_URL}/Icon-class-role-healer-42x42.webp`,
+    'silkiverse': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`,
+    'Steel': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
+    'Mellfunctionn': `${process.env.PUBLIC_URL}/Icon-class-role-healer-42x42.webp`,
+    'Hfd': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
+    'Cuhringe': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
+    'Hammonds': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
+    'Kendk': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`,
+    'Raxity1': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
+    'gatobeats': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
 
   };
 
   // Role priority to help sorting offline streams by role
   const rolePriority = {
-    'Icon-class-role-tank-42x42.webp': 1, // Tank
-    'Icon-class-role-healer-42x42.webp': 2, // Healer
-    'Icon-class-role-dealer-42x42.webp': 3, // Dealer (Damage)
+    'Icon-class-role-tank-42x42.webp': 1,
+    'Icon-class-role-healer-42x42.webp': 2,
+    'Icon-class-role-dealer-42x42.webp': 3,
   };
 
   // Sample images for carousel
   const carouselImages = [
     {
-      image: `${process.env.PUBLIC_URL}/Myst-Banner.webp`,
+      image: `${process.env.PUBLIC_URL}/Nefarian.png`,
       videoUrl: 'https://www.youtube.com/embed/yR0CfrZh26g',
-      overlayText: 'Defeats Heroic: Ragnaros'
-    },
-    {
-      image: `${process.env.PUBLIC_URL}/Myst-Banner1.webp`,
-      videoUrl: 'https://www.youtube.com/embed/gRYZijLZR-Q',
       overlayText: 'Defeats Heroic: Nefarian'
     },
     {
-      image: `${process.env.PUBLIC_URL}/Myst-Banner2.webp`,
+      image: `${process.env.PUBLIC_URL}/Sinestra.png`,
       videoUrl: 'https://www.youtube.com/embed/qz-aQaBQgHY',
       overlayText: 'Defeats Heroic: Sinestra'
-
     },
   ];
 
@@ -152,14 +150,32 @@ const MainPage = () => {
   // Function to toggle offline section visibility and scroll into view
   const toggleOfflineSection = () => {
     setIsOfflineExpanded(prevState => !prevState);
+
+    // Scroll into view only if expanding
     if (!isOfflineExpanded && offlineSectionRef.current) {
       setTimeout(() => {
         offlineSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 200); // Delay to ensure the offline section expands before scrolling
+      }, 100); // Adjust the delay to match the CSS transition timing
     }
   };
-  // Function to open the video modal
-  const openVideoModal = () => {
+
+
+  // Function to open the YouTube video modal
+  const openYouTubeModal = (videoUrl) => {
+    setCurrentVideo({ type: 'youtube', url: videoUrl });
+    setIsVideoModalOpen(true);
+    if (sliderRef.current) {
+      sliderRef.current.slickPause();
+    }
+  };
+
+  // Function to open the Twitch video modal
+  const openTwitchModal = (channel) => {
+    const parentDomain = window.location.hostname; // Get the domain from the current hostname
+    setCurrentVideo({
+      type: 'twitch',
+      url: `https://player.twitch.tv/?channel=${channel}&parent=${parentDomain}`
+    });
     setIsVideoModalOpen(true);
     if (sliderRef.current) {
       sliderRef.current.slickPause();
@@ -169,10 +185,12 @@ const MainPage = () => {
   // Function to close the video modal
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
+    setCurrentVideo(null);
     if (sliderRef.current) {
       sliderRef.current.slickPlay();
     }
   };
+
   return (
     <div className="page-container">
       {/* Header */}
@@ -182,7 +200,7 @@ const MainPage = () => {
             <img src={`${process.env.PUBLIC_URL}/MystLogo.png`} alt="Left Image" className="header-image left" />
           </div>
           <div className="header-center">
-            <span>REALM FIRST Heroic: Ragnaros</span>
+            <span></span>
           </div>
           <div className="header-right">
             <a href="https://discord.com/invite/WpwfdWrmWh" target="_blank" rel="noopener noreferrer">
@@ -195,8 +213,8 @@ const MainPage = () => {
         </div>
       </header>
 
-     {/* Main content area */}
-     <div className="main-content">
+      {/* Main content area */}
+      <div className="main-content">
         <div className="latest-kill-carousel">
           <div className="carousel-container">
             <Slider ref={sliderRef} {...sliderSettings}>
@@ -217,7 +235,7 @@ const MainPage = () => {
                   src={`${process.env.PUBLIC_URL}/youtube-icon.png`}
                   alt="Watch Video"
                   className="overlay-youtube-icon"
-                  onClick={openVideoModal}
+                  onClick={() => openYouTubeModal(carouselImages[currentSlide].videoUrl)}
                 />
               )}
             </div>
@@ -228,15 +246,28 @@ const MainPage = () => {
         {isVideoModalOpen && (
           <div className="video-modal" onClick={closeVideoModal}>
             <div className="video-container" onClick={(e) => e.stopPropagation()}>
-            <iframe
-                width="100%"
-                height="100%"
-                src={`${carouselImages[currentSlide].videoUrl}?autoplay=1`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              {currentVideo.type === 'youtube' && (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`${currentVideo.url}?autoplay=1`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              )}
+              {currentVideo.type === 'twitch' && (
+                <iframe
+                  src={`${currentVideo.url}&autoplay=true`}
+                  height="100%"
+                  width="100%"
+                  frameBorder="0"
+                  allowFullScreen={true}
+                  scrolling="no"
+                  title="Twitch Stream Player"
+                ></iframe>
+              )}
             </div>
           </div>
         )}
@@ -246,9 +277,15 @@ const MainPage = () => {
           {/* Recruitment Section */}
           <div className="recruitment-section">
             <h2>We Are Recruiting</h2>
-            <button className="apply-button" onClick={() => window.open('https://discord.com/invite/WpwfdWrmWh')}>
-              <i className="fa-brands fa-discord"></i> Apply Now
-            </button>
+            <div className="button-container">
+              <button className="apply-button" onClick={() => window.open('https://discord.com/invite/WpwfdWrmWh')}>
+                <span>     <i className="fa-brands fa-discord"></i> Apply Now</span>
+                <div className="top"></div>
+                <div className="left"></div>
+                <div className="bottom"></div>
+                <div className="right"></div>
+              </button>
+            </div>
             <div className="recruitment-info">
               <div className="recruitment-item">
                 <img src={`${process.env.PUBLIC_URL}/balancedruid.webp`} alt="Balance Druid" className="class-icon" />
@@ -258,7 +295,7 @@ const MainPage = () => {
               <div className="recruitment-item">
                 <img src={`${process.env.PUBLIC_URL}/demonologywarlock.jpg`} alt="Demonology Warlock" className="class-icon" />
                 <span className="class-name">Demonology Warlock</span>
-                <span className="priority medium-priority">MEDIUM</span>
+                <span className="priority low-priority">LOW</span>
               </div>
             </div>
           </div>
@@ -269,7 +306,11 @@ const MainPage = () => {
             <div className="streams-section-info">
               {liveStreams.length > 0 ? (
                 liveStreams.map((stream) => (
-                  <div className="stream-item" key={stream.id}>
+                  <div
+                    className="stream-item"
+                    key={stream.id}
+                    onClick={() => openTwitchModal(stream.user_name)}
+                  >
                     <img
                       src={stream.thumbnail_url.replace('{width}', '300').replace('{height}', '200')}
                       alt={stream.title}
@@ -285,13 +326,15 @@ const MainPage = () => {
                         <h3>{displayNames[stream.user_name] || stream.user_name}</h3>
                       </div>
                       <span className="stream-viewers">{stream.viewer_count} viewers</span>
+                      {/* Watch Live Button that opens in a new tab without triggering the modal */}
                       <a
                         href={`https://www.twitch.tv/${stream.user_name}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="twitch-link"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        Watch Live
+                        Watch on Twitch
                       </a>
                     </div>
                   </div>
@@ -299,6 +342,7 @@ const MainPage = () => {
               ) : (
                 <p>Everyone is Offline.</p>
               )}
+
 
               {/* Offline Section */}
               <div className="offline-section" ref={offlineSectionRef}>
