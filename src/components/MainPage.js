@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import './MainPage.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import RaidCountdown from './RaidTimer'; // Adjust the path if needed
 const MainPage = () => {
   const [liveStreams, setLiveStreams] = useState([]);
   const [offlineStreams, setOfflineStreams] = useState([]);
@@ -261,6 +261,8 @@ const MainPage = () => {
             </div>
           </div>
         )}
+ {/* RaidCountdown component goes here */}
+ <RaidCountdown />
 
         {/* Container for Recruitment and Live Streams */}
         <div className="recruitment-streams-container">

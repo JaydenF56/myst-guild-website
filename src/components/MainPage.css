@@ -470,7 +470,7 @@ body {
 }
 
 .recruitment-section h2,
-.streams-section h2 {
+.streams-section h2,.raid-timer-toolbar h2  {
     font-family: "Roboto Condensed", sans-serif;
     text-transform: uppercase;
     color: white;
@@ -486,7 +486,7 @@ body {
 
 
 .recruitment-section h2::before,
-.streams-section h2::before {
+.streams-section h2::before, .raid-timer-toolbar h2::before {
     content: '';
     position: absolute;
     left: 0;
@@ -588,6 +588,7 @@ body {
     margin-right: 5px;
     vertical-align: middle;
 }
+
 
 
 
