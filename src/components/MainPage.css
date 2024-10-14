@@ -320,6 +320,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;
+    font-weight: bold;
 }
 
 .class-icon {
@@ -470,15 +471,15 @@ body {
 }
 
 .recruitment-section h2,
-.streams-section h2,.raid-timer-toolbar h2  {
+.streams-section h2  {
     font-family: "Roboto Condensed", sans-serif;
     text-transform: uppercase;
     color: white;
     margin: 0;
-    font-size: 18px;
-    letter-spacing: 0.5px;
+    font-size: 14px;
+    letter-spacing: 1px;
     background: linear-gradient(to right, rgba(34, 139, 34, 0.08), rgba(20, 20, 20, 0));
-    padding: 10px 20px;
+    padding: 10px 10px;
     position: relative;
     display: inline-block;
 }
@@ -486,7 +487,7 @@ body {
 
 
 .recruitment-section h2::before,
-.streams-section h2::before, .raid-timer-toolbar h2::before {
+.streams-section h2::before {
     content: '';
     position: absolute;
     left: 0;

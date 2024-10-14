@@ -16,7 +16,6 @@ const raids = {
     name: "Tier 11",
     bosses: [
       { id: 1, name: "Sinestra", image: `${process.env.PUBLIC_URL}/images/Sinestra-consort.png` },
-      { id: 2, name: "Al'Akir", image: `${process.env.PUBLIC_URL}/images/Al'Akir_Cataclysm.webp` }
     ]
   },
   Tier12: {
@@ -37,11 +36,11 @@ const RaidCountdown = () => {
 
   // Default raid times with raid information
   const defaultRaids = [
-    { day: 4, time: '19:30', duration: 3, raid: 'Tier12' }, // Thursday, Tier 11
+    { day: 4, time: '19:30', duration: 3, raid: 'Tier11' }, // Thursday, Tier 11
   ];
 
   const customRaids = [
-    { day: 2, time: '20:00', duration: 2.5, raid: 'Tier12' }, // Custom raid on Tuesday
+    { day: 2, time: '19:00', duration: 3, raid: 'Tier12' }, // Custom raid on Tuesday
   ];
 
   const calculateNextRaid = () => {

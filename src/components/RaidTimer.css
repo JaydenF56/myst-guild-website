@@ -1,49 +1,56 @@
-/* Toolbar container for the countdown */
+/* RaidCountdown Container */
 .raid-timer-toolbar {
   display: flex;
-  justify-content: space-between;
-  background-color: #0c0c0c;
-  margin-bottom: 5px;
-  max-height: 40px;
-  
+  justify-content: center;
+  align-items: center;
+  height: 30px;/* Limit the width to 200px */
+  height: auto;  /* Adjust height as needed */
+  border-radius: 5px;
 }
 
-/* Left side of the toolbar for the countdown text */
+/* Left Section (Time Remaining or Raiding Status) */
 .raid-timer-left {
-  flex-grow: 1;
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+  color: #fff; /* White text */
 }
 
-/* Right side of the toolbar for raid boss images */
+/* Right Section (Raid Bosses Images) */
 .raid-timer-right {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Style for each raid boss image */
+/* Raid Boss Images */
 .raid-boss-image {
-  width: 60px;
-height: 40px;
-  object-fit: fill;
-  transition: transform 0.3s ease;
+  width: 50px;
+  height: 30px;
+  margin-left: 5px;
+  border-radius: 50%;  /* Circular images for bosses */
+  object-fit: cover;  /* Ensures image fits inside the circle */
 }
 
-.raid-boss-image:hover {
-  transform: scale(1.1); /* Slight zoom on hover */
-}
-
-/* Style for the text inside the countdown */
-.raid-timer-text {
-  font-weight: 600; /* Make the text bold */
-  letter-spacing: 0.5px;
-}
-
-/* When raiding, show a subtle glow effect */
+/* Raiding Active Status Text */
 .raiding-active {
-  color: #E74C3C; /* Red color when active */
-  box-shadow: 0 0 8px limegreen; /* Glowing red shadow when raiding */
+  color: #00ff00;  /* Green color when raiding is active */
 }
+@media (max-width: 768px) {
+  .raid-timer-toolbar {
+    font-size: 10px;
+  }
+  .raid-timer-left {
+    flex: 1;
+    text-align: center;
+    font-size:9px;
+    color: #fff; /* White text */
+  }
+  
+  .raid-boss-image {
+    width: 40px;
+    height: 20px;
+    margin-left: -5px;
 
-/* Add a subtle transition effect for state changes */
-.raid-timer-toolbar h2 {
-  transition: all 0.3s ease-in-out;
-  font-size: 16px;
+  }
 }

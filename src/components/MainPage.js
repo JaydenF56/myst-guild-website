@@ -193,12 +193,7 @@ const MainPage = () => {
             <span></span>
           </div>
           <div className="header-right">
-            <a href="https://discord.com/invite/WpwfdWrmWh" target="_blank" rel="noopener noreferrer">
-              <i className="fa-brands fa-discord"></i>
-            </a>
-            <a href="https://www.youtube.com/@Myst-Arugal" target="_blank" rel="noopener noreferrer">
-              <i className="fa-brands fa-youtube"></i>
-            </a>
+          <RaidCountdown />
           </div>
         </div>
       </header>
@@ -261,8 +256,7 @@ const MainPage = () => {
             </div>
           </div>
         )}
- {/* RaidCountdown component goes here */}
- <RaidCountdown />
+
 
         {/* Container for Recruitment and Live Streams */}
         <div className="recruitment-streams-container">
