@@ -270,15 +270,22 @@ const MainPage = () => {
               </button>
             </div>
             <div className="recruitment-info">
-              <div className="recruitment-item">
-                <img src={`${process.env.PUBLIC_URL}/balancedruid.webp`} alt="Balance Druid" className="class-icon" />
-                <span className="class-name">Balance Druid</span>
+            <div className="recruitment-item">
+                <img src={`${process.env.PUBLIC_URL}/demonologywarlock.jpg`} alt="Demonology Warlock" className="class-icon" />
+                <span className="class-name">Demonology Warlock</span>
                 <span className="priority high-priority">HIGH</span>
               </div>
               <div className="recruitment-item">
-                <img src={`${process.env.PUBLIC_URL}/demonologywarlock.jpg`} alt="Demonology Warlock" className="class-icon" />
-                <span className="class-name">Demonology Warlock</span>
+                <img src={`${process.env.PUBLIC_URL}/balancedruid.webp`} alt="Balance Druid" className="class-icon" />
+                <span className="class-name">Balance Druid</span>
                 <span className="priority low-priority">LOW</span>
+              </div>
+              <div className="recruitment-item">
+                <img src={`${process.env.PUBLIC_URL}/gamer.png`} alt="Balance Druid" className="class-icon" />
+                <span className="class-name">
+    You <span style={{fontSize: "10px" }}>(If Skilled)</span>
+  </span>
+                <span className="priority good">APPLY</span>
               </div>
             </div>
           </div>

@@ -350,7 +350,9 @@ body {
     font-size: 16px;
     font-weight: bold;
 }
-
+.good {
+    color: #1ceea89f;
+}
 .high-priority {
     color: #ff0000;
 }
