@@ -53,7 +53,7 @@ const MainPage = () => {
   const carouselImages = [
     {
       image: `${process.env.PUBLIC_URL}/Nefarian.png`,
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       overlayText: 'Defeats Heroic: Nefarian'
     },
     {
