@@ -25,11 +25,11 @@
 
 /* Raid Boss Images */
 .raid-boss-image {
-  width: 50px;
-  height: 30px;
+  width: 80px;
+  height: 40px;
   margin-left: 5px;
   border-radius: 50%;  /* Circular images for bosses */
-  object-fit: cover;  /* Ensures image fits inside the circle */
+  object-fit: fill;  /* Ensures image fits inside the circle */
 }
 
 /* Raiding Active Status Text */

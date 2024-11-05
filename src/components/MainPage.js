@@ -22,7 +22,7 @@ const MainPage = () => {
     'silkiverse',
     'itsshynie',
     'Raxity1',
-    'gatobeats'
+
   ], []);
 
   // Updated Mapping for Display Names
@@ -31,7 +31,6 @@ const MainPage = () => {
     'silkiverse': 'Silky',
     'Steel': 'Coony',
     'Raxity1': 'Rax',
-    'gatobeats': 'TEST STREAM',
   };
 
   // Updated Mapping for Role Icons
@@ -40,7 +39,6 @@ const MainPage = () => {
     'silkiverse': `${process.env.PUBLIC_URL}/Icon-class-role-tank-42x42.webp`,
     'Steel': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
     'Raxity1': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
-    'gatobeats': `${process.env.PUBLIC_URL}/Icon-class-role-dealer-42x42.webp`,
 
   };
 
@@ -55,12 +53,11 @@ const MainPage = () => {
   const carouselImages = [
     {
       image: `${process.env.PUBLIC_URL}/Nefarian.png`,
-      videoUrl: 'https://www.youtube.com/embed/yR0CfrZh26g',
+      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
       overlayText: 'Defeats Heroic: Nefarian'
     },
     {
       image: `${process.env.PUBLIC_URL}/Sinestra.png`,
-      videoUrl: 'https://www.youtube.com/embed/qz-aQaBQgHY',
       overlayText: 'Defeats Heroic: Sinestra'
     },
   ];
